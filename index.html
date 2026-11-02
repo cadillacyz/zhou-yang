@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{color-scheme:light}body{margin:0}img{max-width:100%}</style>
+<title>Zhou Yang, PhD</title>
+<meta name="description" content="Zhou Yang, PhD, is an economist in Toronto. Early findings on how health AI gets tested, paid for and used.">
+<meta property="og:title" content="Zhou Yang, PhD">
+<meta property="og:description" content="How will you know it worked? Early findings on how health AI gets tested, paid for and used.">
+<meta property="og:type" content="profile">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Spectral:wght@400;500&display=swap">
+<style>
+/* Layout: a research profile. A short introduction with a photo, then the findings as a single column of headline, explanation and real figure, then a brief about. Light only, because the paper figures have white backgrounds. */
+:root {
+  --bg: #f4f7f6;
+  --paper: #ffffff;
+  --ink: #14312c;
+  --muted: #4e645d;
+  --rule: #d3dfda;
+  --accent: #0b6b5f;
+  --display: "Spectral", Georgia, "Times New Roman", serif;
+  --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+.wrap {
+  max-width: 820px;
+  margin-inline: auto;
+  padding-left: max(20px, env(safe-area-inset-left, 0px));
+  padding-right: max(20px, env(safe-area-inset-right, 0px));
+  padding-block: 64px 40px;
+  display: grid;
+  gap: 64px;
+}
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+p, h1, h2, h3, figure { margin: 0; }
+
+.intro {
+  display: grid;
+  grid-template-columns: 196px minmax(0, 1fr);
+  gap: 36px;
+  align-items: center;
+}
+.photo {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  background: var(--paper);
+}
+.intro-text { display: grid; gap: 14px; min-width: 0; }
+h1 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(2.5rem, 7vw, 3.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+}
+.lede {
+  font-family: var(--display);
+  font-size: 1.4375rem;
+  line-height: 1.4;
+  text-wrap: pretty;
+}
+.contact { display: flex; flex-wrap: wrap; gap: 8px 22px; font-weight: 500; }
+
+.findings { display: grid; gap: 56px; }
+.findings-head { display: grid; gap: 8px; }
+h2 {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 1.875rem;
+  line-height: 1.2;
+}
+.note { color: var(--muted); }
+
+.finding { display: grid; gap: 14px; padding-top: 32px; border-top: 1px solid var(--rule); }
+.topic {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+h3 {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 1.625rem;
+  line-height: 1.25;
+  text-wrap: balance;
+}
+.finding > p { max-width: 68ch; }
+figure { display: grid; gap: 10px; min-width: 0; margin-top: 6px; }
+figure a { display: block; background: var(--paper); border: 1px solid var(--rule); border-radius: 8px; padding: 12px; }
+figure img { display: block; width: 100%; height: auto; }
+figcaption { font-size: 0.875rem; color: var(--muted); max-width: 68ch; }
+.source { font-size: 0.875rem; font-weight: 500; color: var(--muted); }
+
+.about { display: grid; gap: 16px; padding-top: 32px; border-top: 1px solid var(--rule); }
+.about p { max-width: 68ch; }
+
+footer { font-size: 0.875rem; color: var(--muted); display: grid; gap: 6px; padding-top: 24px; border-top: 1px solid var(--rule); }
+
+@media (max-width: 640px) {
+  .wrap { padding-block: 40px 32px; gap: 48px; }
+  .intro { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .photo { width: 136px; }
+  .findings { gap: 40px; }
+  h3 { font-size: 1.4375rem; }
+  figure a { padding: 6px; }
+}
+</style>
+<link rel="canonical" href="https://cadillacyz.github.io/zhou-yang/">
+<link rel="icon" href="figures/zhou-yang.jpg">
+<meta property="og:url" content="https://cadillacyz.github.io/zhou-yang/">
+<meta property="og:image" content="https://cadillacyz.github.io/zhou-yang/figures/zhou-yang.jpg">
+</head>
+<body>
+<div class="wrap">
+  <header class="intro">
+    <img class="photo" src="figures/zhou-yang.jpg" width="640" height="640" alt="Portrait of Zhou Yang">
+    <div class="intro-text">
+      <h1>Zhou Yang, PhD</h1>
+      <p class="lede">How will you know it worked? I ask that question about health programs and health AI.</p>
+      <p>I'm an economist in Toronto. I study how AI in health care gets tested, how it gets paid for, and how patients use it.</p>
+      <p class="contact">
+        <a href="https://www.linkedin.com/in/zhou-yang-252661a7">LinkedIn</a>
+        <a href="mailto:cadillacyz@gmail.com">cadillacyz@gmail.com</a>
+        <a href="cv.html">CV</a>
+      </p>
+    </div>
+  </header>
+
+  <main class="findings">
+    <div class="findings-head">
+      <h2>Early findings</h2>
+      <p class="note">These come from working papers. None has been peer reviewed yet, and I'll link each paper here once it's posted.</p>
+    </div>
+
+    <article class="finding" id="chatbots">
+      <p class="topic">Patients and chatbots</p>
+      <h3>People who use a chatbot instead of care stand out for trust, much more than for access.</h3>
+      <p>In a 2025 Canadian survey, 42% of about 6,200 health-chatbot users said they had used chatbot advice instead of contacting a health professional. Having no regular provider made little difference (−2.7 points, 90% CI −5.9 to 0.5). People unhappy with how soon or how close care was scored 4.0 and 6.2 points higher. People with high trust in chatbot health information scored 34.4 points higher (95% CI 31.7 to 37.0). These are survey associations, so they don't show what care people gave up.</p>
+      <figure>
+        <a href="figures/chatbots-trust-access.png"><img src="figures/chatbots-trust-access.png" width="1600" height="677" alt="Three panels of chatbot substitution by access measure. High-trust users sit near 60 to 70 percent and not-high-trust users near 30 percent, whatever their access to care."></a>
+        <figcaption>Exploratory figure from the working paper. In every panel the two trust lines sit far apart, while the access differences within a line are small.</figcaption>
+      </figure>
+      <p class="source">Working paper · 2025 Canadian Digital Health Survey</p>
+    </article>
+
+    <article class="finding" id="two-recordings">
+      <p class="topic">Testing AI scribes</p>
+      <h3>Two recordings aren't enough to pick an AI scribe.</h3>
+      <p>I re-analysed three deployed scribes on 141 public or simulated consultations. A two-recording test picked the best one 52.3% of the time and the worst one 23.8% of the time. Picking at random finds the best one 33.3% of the time. It took 20 recordings to reach 90%. The findings are verified errors on benchmark notes, so they aren't patient harms.</p>
+      <figure>
+        <a href="figures/two-recordings.png"><img src="figures/two-recordings.png" width="1428" height="714" alt="Line chart. The chance of picking the best scribe rises from 52.3 percent at 2 recordings to 90.5 percent at 20 recordings, against 33.3 percent by chance."></a>
+        <figcaption>Any verified finding, redrawn from Figure 2 of the working paper.</figcaption>
+      </figure>
+      <p class="source">Working paper · Public and simulated benchmark data</p>
+    </article>
+
+    <article class="finding" id="reviewers">
+      <p class="topic">Testing the testers</p>
+      <h3>An accuracy test means little until you know how accurate the reviewers are.</h3>
+      <p>Take a 25-note pass or fail test of a tool with 30% bad notes. If the reviewer catches every error, the tool passes about 9% of the time. If the reviewer catches 60%, it passes about 52% of the time. A test that holds up when reviewer accuracy is only known to lie in a range takes 732 notes instead of 25. Measuring reviewers once with known-answer notes removes much of that cost.</p>
+      <figure>
+        <a href="figures/reviewers-pass-rate.png"><img src="figures/reviewers-pass-rate.png" width="1400" height="700" alt="Line chart. The chance that a tool with 30 percent bad notes passes falls from 52.3 percent at a 60 percent reviewer catch rate to 9.05 percent at 100 percent."></a>
+        <figcaption>Chance that a tool with 30% bad notes passes the 25-note test, by reviewer catch rate. Figure from the working paper.</figcaption>
+      </figure>
+      <p class="source">Working paper · Exact calculations on stated accuracy ranges</p>
+    </article>
+
+    <article class="finding" id="consent">
+      <p class="topic">Patients and consent</p>
+      <h3>About 1 in 8 Ontarians told about an AI scribe recall no explicit consent.</h3>
+      <p>In a Canadian online panel, 12.8% of Ontario respondents told that their provider used an AI scribe recalled only implied consent or never being asked (95% interval 10.1 to 15.4). Nationally it was 13.2%, and the share was highest at age 75 and over, at 27.8%, with a wide interval.</p>
+      <figure>
+        <a href="figures/consent-by-age.png"><img src="figures/consent-by-age.png" width="1400" height="719" alt="Dot and interval chart by age group: 9.4 percent at 16 to 34, 14.1 at 35 to 54, 13.4 at 55 to 74 and 27.8 at 75 and over."></a>
+        <figcaption>National estimates by age, with weighted percentages and conditional 95% intervals. The age comparison is exploratory.</figcaption>
+      </figure>
+      <p class="source">Working paper · 2025 Canadian Digital Health Survey</p>
+    </article>
+
+    <article class="finding" id="physician-pay">
+      <p class="topic">Paying for AI</p>
+      <h3>Saving a physician's time can lower their pay.</h3>
+      <p>In a worked scenario, five saved charting hours a month, used to finish earlier, cost CAD 650 in British Columbia, CAD 577.50 in Alberta and CAD 400 in Ontario. US Medicare pay doesn't change when service levels follow medical decision making. Using the time for added care raises pay in every setting, before costs. I haven't confirmed how these rules apply to any one physician's contract.</p>
+      <figure>
+        <a href="figures/scribe-pay.png"><img src="figures/scribe-pay.png" width="1428" height="561" alt="Bar chart of monthly pay lost from five saved hours: CAD 650 in British Columbia, CAD 577.50 in Alberta, CAD 400 in Ontario and USD 0 under US Medicare."></a>
+        <figcaption>Calculated from Table 1 of the working paper. The amounts change with which dates the hours fall on, and Ontario's also depends on its indirect-care allowance.</figcaption>
+      </figure>
+      <p class="source">Working paper · Scenario on public payment rules, not observed behaviour</p>
+    </article>
+  </main>
+
+  <section class="about">
+    <h2>About me</h2>
+    <p>I came to Toronto from Seattle. For four years at Certilytics I worked out whether health programs really changed the use and cost of care, across more than 40 evaluations. Before that I worked on pricing and demand at Amazon and Oracle. My PhD in economics is from the University of Washington. <a href="cv.html">My CV</a> has the details.</p>
+    <p>Now I do independent research. I use AI tools for drafting, code and checking. I choose the questions, review the work and answer for the results.</p>
+    <p>I'd like to meet clinicians, quality teams and researchers who are trying to work out whether a change helped. I'm also looking for a role in public-sector or health care economics and data science. LinkedIn is the easiest way to reach me.</p>
+  </section>
+
+  <footer>
+    <p>Survey findings use Canada Health Infoway's <a href="https://doi.org/10.5683/SP4/FXIQNS">2025 Canadian Digital Health Survey</a>. Infoway doesn't endorse this work.</p>
+    <p>Earlier work: <a href="https://pubmed.ncbi.nlm.nih.gov/32928164/">a paper in BMC Psychiatry</a> (2020) and <a href="https://patents.google.com/patent/US20230401589A1/en">a US patent application</a> (co-inventor).</p>
+    <p>Updated November 2026</p>
+  </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Zhou Yang CV</title>
+<meta name="description" content="CV of Zhou Yang, PhD, an economist in Toronto: experience, education, publications and skills.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Spectral:wght@400;500&display=swap">
+<style>
+/* Layout: the same tokens as the profile page, one column, and a print sheet so it fits two letter pages. */
+:root {
+  --bg: #f4f7f6;
+  --ink: #14312c;
+  --muted: #4e645d;
+  --rule: #d3dfda;
+  --accent: #0b6b5f;
+  --display: "Spectral", Georgia, "Times New Roman", serif;
+  --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+.wrap {
+  max-width: 780px;
+  margin-inline: auto;
+  padding-left: max(20px, env(safe-area-inset-left, 0px));
+  padding-right: max(20px, env(safe-area-inset-right, 0px));
+  padding-block: 48px 40px;
+  display: grid;
+  gap: 32px;
+}
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+p, h1, h2, h3, ul { margin: 0; }
+
+header { display: grid; gap: 8px; }
+.back { font-size: 0.875rem; font-weight: 500; }
+h1 { font-family: var(--display); font-weight: 400; font-size: clamp(2.25rem, 6vw, 3rem); line-height: 1.1; letter-spacing: -0.015em; }
+.contact { display: flex; flex-wrap: wrap; gap: 4px 20px; font-size: 0.9375rem; }
+.contact span { color: var(--muted); }
+
+section { display: grid; gap: 16px; padding-top: 20px; border-top: 1px solid var(--rule); }
+h2 { font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+
+.entry { display: grid; gap: 4px; }
+.entry-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0 16px; }
+h3 { font-size: 1rem; font-weight: 600; line-height: 1.4; }
+.when { color: var(--muted); font-size: 0.9375rem; font-variant-numeric: tabular-nums; }
+.where { color: var(--muted); font-size: 0.9375rem; }
+.entry ul { padding-left: 1.1em; display: grid; gap: 2px; }
+
+.plain { display: grid; gap: 10px; }
+.skills { display: grid; grid-template-columns: 160px minmax(0, 1fr); gap: 6px 16px; }
+.skills dt { font-weight: 500; }
+.skills dd { margin: 0; min-width: 0; }
+
+@media (max-width: 560px) {
+  .wrap { padding-block: 32px; }
+  .skills { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .skills dd { margin-bottom: 8px; }
+}
+@media print {
+  body { background: #fff; font-size: 10.5pt; line-height: 1.4; }
+  .wrap { max-width: none; padding: 0; gap: 14pt; }
+  .back { display: none; }
+  a { color: inherit; text-decoration: none; }
+  .entry { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p class="back"><a href="index.html">Back to my research</a></p>
+    <h1>Zhou Yang, PhD</h1>
+    <p class="contact">
+      <span>Economist, Toronto</span>
+      <a href="https://www.linkedin.com/in/zhou-yang-252661a7">LinkedIn</a>
+      <a href="mailto:cadillacyz@gmail.com">cadillacyz@gmail.com</a>
+    </p>
+  </header>
+
+  <section>
+    <h2>Experience</h2>
+
+    <div class="entry">
+      <div class="entry-head"><h3>Independent Researcher, Health Economics and Health AI</h3><span class="when">Jan 2026 to now</span></div>
+      <p class="where">Toronto</p>
+      <ul>
+        <li>Working papers on how AI in health care gets tested, how it gets paid for, and how patients use it. <a href="index.html">See early findings.</a></li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><h3>Data Scientist, Certilytics</h3><span class="when">Sep 2022 to Sep 2026</span></div>
+      <p class="where">Remote</p>
+      <ul>
+        <li>Led 40+ causal evaluations across 15+ healthcare programs, using claims, eligibility, utilization and cost data.</li>
+        <li>Presented findings and recommendations to client executives and state Medicaid agency staff.</li>
+        <li>Built cost-benefit, ROI and budget-impact models that informed renewal and program decisions.</li>
+        <li>Helped build a GenAI analytics assistant and the evaluation harnesses that tested AI outputs before release.</li>
+        <li>Deployed machine learning models in many projects, and built risk-prediction and forecasting models.</li>
+        <li>Supervised three junior colleagues and led teams of three PhD researchers on public-health topics.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><h3>Data Scientist (Contract), Oracle</h3><span class="when">May to Dec 2021</span></div>
+      <p class="where">Seattle</p>
+      <ul>
+        <li>Built deep-learning models that combine image and text features to predict product characteristics.</li>
+        <li>Co-developed a multimodal double machine learning framework for apparel price elasticity.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><h3>Economist (Contract), Amazon</h3><span class="when">May to Dec 2020</span></div>
+      <p class="where">Seattle</p>
+      <ul>
+        <li>Estimated cross-product elasticity across 1.2M+ products with econometric and machine learning methods.</li>
+        <li>Built a product valuation model to prioritize supply-chain products by consumer demand and value.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head"><h3>Graduate Instructor, Economics, University of Washington</h3><span class="when">2019 to 2022</span></div>
+      <p class="where">Seattle</p>
+      <ul>
+        <li>Taught 8 to 9 sections of introductory economics for about 300 students.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>Education</h2>
+    <div class="entry">
+      <div class="entry-head"><h3>PhD, Economics, University of Washington</h3><span class="when">2023</span></div>
+      <p class="where">Dissertation: Essays on the Digital Transformation of Retail Grocery Industry. Chair: Yuya Takahashi.</p>
+    </div>
+    <div class="entry">
+      <div class="entry-head"><h3>BSc, Mathematics, Augsburg University</h3><span class="when">2017</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Publications and patents</h2>
+    <div class="plain">
+      <p>Ren L, Yang Z, Wang Y, et al. <a href="https://pubmed.ncbi.nlm.nih.gov/32928164/">The relations among worry, meta-worry, intolerance of uncertainty and attentional bias for threat in men at high risk for generalized anxiety disorder: a network analysis.</a> <em>BMC Psychiatry</em>. 2020;20(1):452.</p>
+      <p>Co-inventor. <a href="https://patents.google.com/patent/US20230401589A1/en">Machine Learning Model and Neural Network to Predict Object Characteristics from Digital Image Similarities.</a> US patent application US20230401589A1.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Skills</h2>
+    <dl class="skills">
+      <dt>Causal inference</dt>
+      <dd>Staggered difference-in-differences, synthetic control, regression discontinuity, doubly robust estimation, double machine learning, causal forests</dd>
+      <dt>Experiments</dt>
+      <dd>Online A/B tests on price design</dd>
+      <dt>Machine learning</dt>
+      <dd>Risk prediction, forecasting, deep learning in PyTorch</dd>
+      <dt>Tools</dt>
+      <dd>Python, R, SQL, SQL Server, Snowflake, PySpark, Power BI, Excel and VBA</dd>
+    </dl>
+  </section>
+</div>
+</body>
+</html>
