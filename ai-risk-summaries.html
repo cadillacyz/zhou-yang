@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>EHR AI Risk Summaries</title>
+<meta name="description" content="How many US EHR developers linked a public AI risk summary on 26 Oct 2026, before the HTI-5 rule ends the duty, and what the summaries say. Counts only; no developer is named.">
+<link rel="canonical" href="https://cadillacyz.github.io/zhou-yang/ai-risk-summaries.html">
+<link rel="icon" href="figures/zhou-yang.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Spectral:wght@400;500&display=swap">
+<style>
+/* Layout: the same tokens as the profile page. A table page: headline, what the summaries say, the counts table, then definitions, method, limits and sources. Light only, like the profile page. */
+:root {
+  --bg: #f4f7f6;
+  --paper: #ffffff;
+  --ink: #14312c;
+  --muted: #4e645d;
+  --rule: #d3dfda;
+  --band: #e9f0ed;
+  --accent: #0b6b5f;
+  --display: "Spectral", Georgia, "Times New Roman", serif;
+  --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+.wrap {
+  max-width: 860px;
+  margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 48px 40px;
+  display: grid;
+  gap: 40px;
+}
+a { color: var(--accent); text-underline-offset: 3px; overflow-wrap: anywhere; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+p, h1, h2, h3, figure, ul, ol, dl { margin: 0; }
+header { display: grid; gap: 14px; }
+.back { font-size: 0.875rem; font-weight: 500; }
+.topic { font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+h1 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(2rem, 6vw, 2.875rem);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+.lede { font-family: var(--display); font-size: 1.3125rem; line-height: 1.45; max-width: 68ch; text-wrap: pretty; }
+header p:not(.lede):not(.status):not(.back):not(.topic) { max-width: 68ch; }
+.status { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; font-size: 0.875rem; color: var(--muted); }
+.pill {
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.5;
+  padding: 1px 9px;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  color: var(--accent);
+  background: var(--paper);
+  white-space: nowrap;
+}
+.downloads { display: flex; flex-wrap: wrap; gap: 4px 20px; font-weight: 500; font-size: 0.9375rem; }
+figure { display: grid; gap: 10px; min-width: 0; }
+figure a { display: block; background: var(--paper); border: 1px solid var(--rule); border-radius: 8px; padding: 12px; }
+figure img { display: block; width: 100%; height: auto; }
+figcaption { font-size: 0.875rem; color: var(--muted); max-width: 68ch; }
+
+section { display: grid; gap: 14px; padding-top: 28px; border-top: 1px solid var(--rule); min-width: 0; }
+h2 { font-family: var(--display); font-weight: 500; font-size: 1.625rem; line-height: 1.2; }
+section > p, section > ul, section > ol { max-width: 68ch; }
+section ul, section ol { padding-left: 1.2em; display: grid; gap: 8px; }
+.note { color: var(--muted); font-size: 0.9375rem; }
+
+.scroll { overflow-x: auto; background: var(--paper); border: 1px solid var(--rule); border-radius: 8px; }
+table { border-collapse: collapse; width: 100%; font-size: 0.875rem; line-height: 1.4; }
+th, td { padding: 7px 10px; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: bottom; }
+thead th { background: var(--band); font-weight: 600; font-size: 0.8125rem; }
+td { text-align: right; font-variant-numeric: tabular-nums; }
+thead th:not(:first-child) { text-align: right; }
+tbody th { font-weight: 400; min-width: 13em; }
+tr.total th, tr.total td { font-weight: 600; }
+tr.group th { font-style: italic; color: var(--muted); font-weight: 500; padding-top: 14px; }
+tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+
+.defs { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 8px 18px; max-width: 76ch; }
+.defs dt { font-weight: 600; }
+.defs dd { margin: 0; min-width: 0; }
+
+footer { font-size: 0.875rem; color: var(--muted); display: flex; flex-wrap: wrap; gap: 4px 18px; padding-top: 20px; border-top: 1px solid var(--rule); }
+
+@media (max-width: 640px) {
+  .wrap { padding-block: 32px; gap: 32px; }
+  figure a { padding: 6px; }
+  tbody th, thead th:first-child { min-width: 9em; position: sticky; left: 0; background: var(--paper); box-shadow: 1px 0 0 var(--rule); }
+  thead th:first-child { background: var(--band); }
+  .defs { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .defs dd { margin-bottom: 10px; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p class="back"><a href="index.html#ai-risk-summaries">Back to my research</a></p>
+    <p class="topic">Public data · AI transparency rules</p>
+    <h1>Who publishes an AI risk summary before the US duty ends</h1>
+    <p class="lede">On 26 Oct 2026, 53 of the 216 US health IT developers certified to the decision-support criterion linked a public AI risk summary from their CHPL listing (24.5%). The other 163 stated on every listing that they don't currently supply a predictive decision-support tool as part of their certified software.</p>
+    <p>ONC's HTI-5 final rule ends this duty on Mon 28 Dec 2026. This table is the record from before it does. The same pages will be captured again on Mon 4 Jan, Mon 5 Apr and Mon 5 Jul 2027, to see which developers keep, change or remove a summary. No developer is named here.</p>
+    <p class="status"><span class="pill">Public data</span> <span>A count on one day · AI-coded; a person checked 10 of 53 · Not peer reviewed · ONC CHPL, 26 Oct 2026</span></p>
+    <p class="downloads"><a href="data/hti5_baseline_by_group.csv">Download the table (CSV)</a> <a href="data/hti5_headline.csv">Headline numbers (CSV)</a></p>
+  </header>
+
+  <figure>
+    <a href="figures/ai-risk-summaries.png"><img src="figures/ai-risk-summaries.png" width="1428" height="370" alt="Bar chart of 216 certified EHR developers on 26 October 2026: 53 linked a public AI risk summary and 163 said they don't currently supply a predictive decision-support tool as part of their certified software."></a>
+    <figcaption>Counted from ONC's public CHPL search. Six developers gave both a link and a "not currently supplied" statement, and they're counted as linked.</figcaption>
+  </figure>
+
+  <section>
+    <h2>What the 53 summaries say</h2>
+    <ul>
+      <li><strong>Few name a tool.</strong> 16 name a specific tool or model, 5 describe kinds of tool, and 20 describe a process only or say no predictive tool is supplied. The other 12 can't be coded.</li>
+      <li><strong>The developers with the most listings named none.</strong> Of the 5 with 5 or more listings, 4 could be read, and none of those names a tool. Among developers with one listing, 14 of the 29 that could be coded do.</li>
+      <li><strong>About half carry no date.</strong> 18 state a date, 3 give only their own version number, and 20 state neither; 12 can't be coded.</li>
+      <li><strong>Almost all earlier disclosers stayed.</strong> Of the 35 developers in a study of these summaries from December 2025, 34 still linked one.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>The table</h2>
+    <p class="note">Counts of developers, except linked listings. Each breakdown adds up to 53. On a phone, swipe the table sideways.</p>
+    <div class="scroll">
+      <table>
+        <thead><tr><th scope="col">Group</th><th scope="col">Developers</th><th scope="col">Linked listings</th><th scope="col">Text saved</th><th scope="col">Names a tool</th><th scope="col">Kinds only</th><th scope="col">Process or none</th><th scope="col">Not coded</th><th scope="col">Date</th><th scope="col">Version only</th></tr></thead>
+        <tbody>
+          <tr class="total"><th scope="row">All</th><td>53</td><td>78</td><td>45</td><td>16</td><td>5</td><td>20</td><td>12</td><td>18</td><td>3</td></tr>
+          <tr class="group"><th scope="rowgroup">Size band ((b)(11) listings)</th><td colspan="9"></td></tr>
+          <tr><th scope="row">1 listing</th><td>40</td><td>40</td><td>33</td><td>14</td><td>5</td><td>10</td><td>11</td><td>11</td><td>3</td></tr>
+          <tr><th scope="row">2 to 4 listings</th><td>8</td><td>16</td><td>8</td><td>2</td><td>0</td><td>6</td><td>0</td><td>5</td><td>0</td></tr>
+          <tr><th scope="row">5 or more listings</th><td>5</td><td>22</td><td>4</td><td>0</td><td>0</td><td>4</td><td>1</td><td>2</td><td>0</td></tr>
+          <tr class="group"><th scope="rowgroup">Certification body</th><td colspan="9"></td></tr>
+          <tr><th scope="row">Drummond Group</th><td>40</td><td>65</td><td>34</td><td>11</td><td>3</td><td>16</td><td>10</td><td>13</td><td>1</td></tr>
+          <tr><th scope="row">SLI Compliance</th><td>13</td><td>13</td><td>11</td><td>5</td><td>2</td><td>4</td><td>2</td><td>5</td><td>2</td></tr>
+          <tr class="group"><th scope="rowgroup">Discloser status</th><td colspan="9"></td></tr>
+          <tr><th scope="row">In the Dec 2025 study (34 of its 35)</th><td>34</td><td>56</td><td>31</td><td>10</td><td>4</td><td>13</td><td>7</td><td>12</td><td>0</td></tr>
+          <tr><th scope="row">Not in the Dec 2025 study</th><td>19</td><td>22</td><td>14</td><td>6</td><td>1</td><td>7</td><td>5</td><td>6</td><td>3</td></tr>
+          <tr class="group"><th scope="rowgroup">Segment (a judgment, low confidence for 30 of 53)</th><td colspan="9"></td></tr>
+          <tr><th scope="row">General ambulatory</th><td>35</td><td>39</td><td>28</td><td>15</td><td>5</td><td>7</td><td>8</td><td>11</td><td>3</td></tr>
+          <tr><th scope="row">Hospital-led</th><td>4</td><td>21</td><td>4</td><td>0</td><td>0</td><td>4</td><td>0</td><td>2</td><td>0</td></tr>
+          <tr><th scope="row">Post-acute and long-term care</th><td>4</td><td>5</td><td>3</td><td>0</td><td>0</td><td>3</td><td>1</td><td>0</td><td>0</td></tr>
+          <tr><th scope="row">Specialty ambulatory</th><td>4</td><td>4</td><td>4</td><td>0</td><td>0</td><td>4</td><td>0</td><td>3</td><td>0</td></tr>
+          <tr><th scope="row">Other (4 segments of 2 or fewer developers each)</th><td>6</td><td>9</td><td>6</td><td>1</td><td>0</td><td>2</td><td>3</td><td>2</td><td>0</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">The CSV has the same rows. It also splits "Text saved" into same-day, earlier copy only and none, and adds two date columns ("neither" and "not coded").</p>
+  </section>
+
+  <section>
+    <h2>What the columns mean</h2>
+    <dl class="defs">
+      <dt>Developers</dt><dd>Developers in the group that linked a summary on 26 Oct 2026.</dd>
+      <dt>Linked listings</dt><dd>Their (b)(11) listings whose summary field holds a web address.</dd>
+      <dt>Text saved</dt><dd>A copy of the summary from 26 Oct 2026. The others have an older Wayback copy (4) or none (4).</dd>
+      <dt>Names a tool</dt><dd>The summary, or a document it links, names a predictive tool, model or feature the developer supplies.</dd>
+      <dt>Kinds only</dt><dd>It describes kinds of tool in general terms but names none.</dd>
+      <dt>Process or none</dt><dd>It describes a risk-management process only, or says no predictive tool is supplied.</dd>
+      <dt>Not coded</dt><dd>Nothing readable to code: no text saved (8), a page that only links a plan that wasn't saved (3), or a sales page with no summary (1). Neither trait is coded for these.</dd>
+      <dt>Date</dt><dd>The summary, or the page it sits on, states its own date ("Published", "Last updated", a header date, an attestation date). Certification dates and copyright years don't count.</dd>
+      <dt>Version only</dt><dd>It gives its own version number and no date. A product's software version doesn't count.</dd>
+    </dl>
+  </section>
+
+  <section>
+    <h2>How it was made</h2>
+    <ol>
+      <li><strong>Who is in.</strong> Every developer with a listing certified to 45 CFR 170.315(b)(11) whose "Risk Management Summary Information" field held a web address in the CHPL export of 26 Oct 2026, about 6:25 pm Toronto time. All 287 listings were active.</li>
+      <li><strong>Baseline copy.</strong> Each of the 52 distinct addresses was fetched once with an honest user agent, between 11:34 and 11:36 pm Toronto time. Pages that refused the script were logged as blocked and not worked around. Two pages that build their text by script were copied by hand from a normal browser. One page that refused at 11:35 pm uses the script's copy from 6:29 pm the same evening.</li>
+      <li><strong>Repeatability.</strong> Pages captured twice were compared address by address. Between 6:29 pm and 11:35 pm, all 43 comparable pages had identical text, though 13 differed in their bytes. Eight minutes later, a third capture of 60 addresses found no text difference.</li>
+      <li><strong>Coding: AI-coded; a person checked 10 of 53.</strong> Two AI coders (both Claude, the second blind to the first) read the saved text and coded two traits: does the summary name a specific predictive tool, and does it state its own date or version? They agreed on 33 of 45 developers for the first trait and 30 of 45 for the second. A third reading settled the 27 disagreements under written rules that sharpen two lines: a kind of tool against process text, and the summary's own date against the product's version. Then, on 9 Nov 2026, I read 10 of the 53 myself, drawn at random from the 45 with same-day text, without seeing the codes. I agreed with the AI coding on 10 of 10 for whether the summary is dated and on 9 of 10 for whether it names a tool; the table uses my reading for the tenth, a summary that identifies a feature inside a named product. Ten rows can't prove all 53, and they don't cover the 8 without same-day text.</li>
+      <li><strong>Groups.</strong> Size band is the developer's count of (b)(11) listings. The certification body comes from CHPL. "In the Dec 2025 study" means the developer appears in the coded table of Manikkoth et al. Segment is a judgment from product names, not a CHPL field. Segments with fewer than 3 developers are merged into "Other".</li>
+    </ol>
+    <p><strong>AI use.</strong> I built this table with Claude, an AI model. Claude read the saved text and coded the traits twice, blind, with a third reading on disagreements, and Python scripts did the downloads and counts. I checked 10 of the 53 codes by hand.</p>
+  </section>
+
+  <section>
+    <h2>Limits</h2>
+    <ul>
+      <li><strong>Mostly AI-coded.</strong> Two blind AI codings agreed on about 7 in 10 developers per trait, and a third reading settled the rest. Copies of one model can share errors. I checked 10 of the 53 by hand, and ten rows can't prove the rest: with 1 disagreement in 10, the error rate on "names a tool" could still be as high as about 39% (one-sided 95% bound). This isn't peer reviewed.</li>
+      <li><strong>Gaps in the baseline.</strong> 8 of the 53 have no text from 26 Oct 2026. 4 of those have an older Wayback copy, which wasn't coded.</li>
+      <li><strong>Small groups.</strong> "5 or more listings" holds 5 developers, and some segments hold 4. Some trait cells hold a single developer, and CHPL is public, so a determined reader could guess who is in a small group. The table gives only counts of traits.</li>
+      <li><strong>Segment is a judgment,</strong> with low confidence for 30 of the 53. The size band counts (b)(11) listings, not all of a developer's products.</li>
+      <li><strong>What 53 of 216 means.</strong> It counts developers that link a summary in CHPL, not developers that "use AI". The other 163 rest on each developer's own statement that it doesn't currently supply one as part of its certified software (CHPL's wording: "does not currently supply a Predictive DSI as part of its Health IT Module"). Other parties' tools can still run inside that software. 6 of the 53 also make that statement on another listing.</li>
+      <li><strong>Only the baseline exists so far.</strong> The 2027 captures haven't run.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Sources and reuse</h2>
+    <dl class="defs">
+      <dt>Sources</dt><dd>(1) ONC's Certified Health IT Product List, <a href="https://chpl.healthit.gov/#/search">CHPL</a>, a search export filtered to 170.315(b)(11). (2) The summary pages those listings link. (3) Manikkoth et al., <em>npj Digital Medicine</em> (2026), <a href="https://www.nature.com/articles/s41746-026-03152-w">article</a>, supplementary file MOESM1. (4) The Wayback Machine's capture index. (5) The HTI-5 final rule, 91 FR 67916, <a href="https://www.federalregister.gov/d/2026-21943">Federal Register</a>: instructions 11, 13 and 18 end the duty, effective 28 Dec 2026.</dd>
+      <dt>Dates</dt><dd>CHPL export and summary pages: 26 Oct 2026, evening, Toronto time. Supplement and Wayback index: 26 and 27 Oct 2026. Rule: read 2 Nov 2026. Codes settled 9 Nov 2026, with one recoded after the hand check. Checked again 8 Nov 2026: the Federal Register shows no correction to the rule, and live CHPL lists 288 (b)(11) listings from 217 developers. The one listing added since 26 Oct, certified 5 Nov by a new developer, carries the no-predictive-tool statement, and none dropped off.</dd>
+      <dt>Terms</dt><dd>CHPL is federal information in the public domain, and HealthIT.gov asks for attribution (<a href="https://healthit.gov/website-disclaimers/">website disclaimers</a>). Manikkoth et al. is CC BY-NC-ND 4.0, so this page cites its count and doesn't reproduce or adapt its tables. The summary pages belong to each developer; no text from them appears here.</dd>
+      <dt>Licence</dt><dd>This table and its CSVs are under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, like my <a href="https://github.com/cadillacyz/us-hospital-ehr-table">hospital EHR table</a>. Please cite: Zhou Yang, "EHR developer AI risk summaries, baseline of 26 Oct 2026," cadillacyz.github.io/zhou-yang/ai-risk-summaries.html. Derived from ONC's public data; not an ONC product.</dd>
+      <dt>Rebuild</dt><dd>A script recounts every number from the raw CHPL export and the saved pages, and stops if a developer name, CHPL ID or summary address reaches the published files.</dd>
+    </dl>
+  </section>
+
+  <footer>
+    <span>Zhou Yang, PhD · Toronto</span>
+    <a href="index.html">Research</a>
+    <a href="cv.html">CV</a>
+  </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,11 @@
+measure,value,note,checked_by_person
+"Developers with a (b)(11) listing, CHPL export 26 Oct 2026",216,Active listings in the raw export; none was suspended.,no
+... that link a public AI risk summary,53,"Same 53 in the export, PANEL.csv and DEVELOPERS.csv.",no
+Share linking a summary,24.5%,,no
+... whose every listing states the developer doesn't currently supply a predictive tool as part of its certified software,163,The developer's own statement in the CHPL field: does not currently supply a Predictive DSI as part of its Health IT Module.,no
+(b)(11) listings,287,,no
+... that carry a summary link,78,,no
+Developers with baseline text from 26 Oct 2026,45,"Fetched by script, copied by hand, or saved earlier the same evening.",no
+Developers in the Dec 2025 study,35,"Manikkoth et al. 2026, read here for the count only.",no
+... still linking a summary on 26 Oct 2026,34,,no
+Federal duty ends (rule effective),Mon 28 Dec 2026,"91 FR 67916, DATES; instructions 11, 13 and 18.",no
