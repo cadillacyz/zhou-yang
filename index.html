@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Spectral:wght@400;500&display=swap">
 <style>
-/* Layout: a research profile. A short introduction with a photo, then the findings as a single column of headline, explanation and real figure, then a brief about. Light only, because the paper figures have white backgrounds. */
+/* Layout: a research profile. A short introduction with a photo, then the findings as a single column of headline, explanation and real figure, then data, press and a brief about. Light only, because the paper figures have white backgrounds. */
 :root {
   --bg: #f4f7f6;
   --paper: #ffffff;
@@ -43,7 +43,7 @@ body {
 }
 a { color: var(--accent); text-underline-offset: 3px; }
 a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-p, h1, h2, h3, figure { margin: 0; }
+p, h1, h2, h3, figure, ul { margin: 0; }
 
 .intro {
   display: grid;
@@ -77,6 +77,7 @@ h1 {
   text-wrap: pretty;
 }
 .contact { display: flex; flex-wrap: wrap; gap: 8px 22px; font-weight: 500; }
+.jump { display: flex; flex-wrap: wrap; gap: 4px 18px; font-size: 0.9375rem; color: var(--muted); }
 
 .findings { display: grid; gap: 56px; }
 .findings-head { display: grid; gap: 8px; }
@@ -108,10 +109,35 @@ figure { display: grid; gap: 10px; min-width: 0; margin-top: 6px; }
 figure a { display: block; background: var(--paper); border: 1px solid var(--rule); border-radius: 8px; padding: 12px; }
 figure img { display: block; width: 100%; height: auto; }
 figcaption { font-size: 0.875rem; color: var(--muted); max-width: 68ch; }
-.source { font-size: 0.875rem; font-weight: 500; color: var(--muted); }
 
-.about { display: grid; gap: 16px; padding-top: 32px; border-top: 1px solid var(--rule); }
-.about p { max-width: 68ch; }
+.status { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; font-size: 0.875rem; color: var(--muted); }
+.finding > p.status { max-width: none; }
+.pill {
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.5;
+  padding: 1px 9px;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  color: var(--accent);
+  background: var(--paper);
+  white-space: nowrap;
+}
+.slot { font-weight: 500; }
+
+.data, .press, .about, .papers { display: grid; gap: 16px; padding-top: 32px; border-top: 1px solid var(--rule); }
+.paper-list { display: grid; gap: 18px; list-style: none; padding: 0; max-width: 68ch; }
+.paper-list li { display: grid; gap: 4px; min-width: 0; }
+.paper-list cite { font-style: normal; font-weight: 600; }
+.data p, .about p { max-width: 68ch; }
+.data h3, .press h3 { font-family: var(--body); font-weight: 600; font-size: 1.0625rem; line-height: 1.4; }
+.data-list { display: grid; gap: 18px; list-style: none; padding: 0; }
+.data-list li { display: grid; gap: 2px; min-width: 0; }
+.press-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 36px; }
+.press-item { display: grid; gap: 6px; align-content: start; min-width: 0; }
+.press-item.wide { grid-column: 1 / -1; }
+.press-item ul { padding-left: 1.1em; display: grid; gap: 2px; }
+.bio { background: var(--paper); border: 1px solid var(--rule); border-radius: 8px; padding: 14px 16px; max-width: 68ch; }
 
 footer { font-size: 0.875rem; color: var(--muted); display: grid; gap: 6px; padding-top: 24px; border-top: 1px solid var(--rule); }
 
@@ -122,6 +148,7 @@ footer { font-size: 0.875rem; color: var(--muted); display: grid; gap: 6px; padd
   .findings { gap: 40px; }
   h3 { font-size: 1.4375rem; }
   figure a { padding: 6px; }
+  .press-grid { grid-template-columns: minmax(0, 1fr); }
 }
 </style>
 <link rel="canonical" href="https://cadillacyz.github.io/zhou-yang/">
@@ -131,6 +158,7 @@ footer { font-size: 0.875rem; color: var(--muted); display: grid; gap: 6px; padd
 </head>
 <body>
 <div class="wrap">
+
   <header class="intro">
     <img class="photo" src="figures/zhou-yang.jpg" width="640" height="640" alt="Portrait of Zhou Yang">
     <div class="intro-text">
@@ -141,11 +169,21 @@ footer { font-size: 0.875rem; color: var(--muted); display: grid; gap: 6px; padd
         <a href="https://www.linkedin.com/in/zhou-yang-252661a7">LinkedIn</a>
         <a href="mailto:cadillacyz@gmail.com">cadillacyz@gmail.com</a>
         <a href="cv.html">CV</a>
+        <a href="zhou-yang-cv.pdf">CV (PDF)</a>
+        <a href="https://orcid.org/0009-0006-5744-6769">ORCID</a>
       </p>
+      <nav class="jump" aria-label="On this page">
+        <a href="#findings">Findings</a>
+        <a href="#papers">Papers</a>
+        <a href="#public-data">Public data</a>
+        <a href="#data">Data</a>
+        <a href="#press">For press</a>
+        <a href="#about">About</a>
+      </nav>
     </div>
   </header>
 
-  <main class="findings">
+  <main class="findings" id="findings">
     <div class="findings-head">
       <h2>Early findings</h2>
       <p class="note">These come from working papers. None has been peer reviewed yet, and I'll link each paper here once it's posted.</p>
@@ -153,63 +191,165 @@ footer { font-size: 0.875rem; color: var(--muted); display: grid; gap: 6px; padd
 
     <article class="finding" id="chatbots">
       <p class="topic">Patients and chatbots</p>
-      <h3>People who use a chatbot instead of care stand out for trust, much more than for access.</h3>
-      <p>In a 2025 Canadian survey, 42% of about 6,200 health-chatbot users said they had used chatbot advice instead of contacting a health professional. Having no regular provider made little difference (−2.7 points, 90% CI −5.9 to 0.5). People unhappy with how soon or how close care was scored 4.0 and 6.2 points higher. People with high trust in chatbot health information scored 34.4 points higher (95% CI 31.7 to 37.0). These are survey associations, so they don't show what care people gave up.</p>
+      <h3>People without a regular provider showed no evidence of turning to chatbots instead of a professional more often.</h3>
+      <p>In the 2025 Canadian Digital Health Survey, an online panel run in early 2026, 42% of about 6,200 people who had used general AI chatbots for health said they had used one to seek medical advice or guidance instead of contacting a health professional. Having no regular provider, compared with having a family doctor or nurse practitioner, showed no evidence of a higher rate (−2.7 points, 90% CI −5.9 to 0.5, under the survey's own weights). People unhappy with how soon or how close care was were 4.0 and 6.2 percentage points more likely to report doing so, after adjustment. People with high trust in chatbot health information were 34.4 points more likely (95% CI 31.7 to 37.0), though a gap like that is expected, since the trust question and the outcome are about the same chatbot advice. People in the top third of self-rated eHealth literacy were 14.6 points more likely than those in the bottom third (95% CI 11.3 to 18.0), about half that (7.4) in a later check holding the other measures fixed. Trust and access are measured differently, so these numbers don't rank one above the other. People who did this were also more likely, not less, to report professional care in the past year: any walk-in or non-regular GP contact (10.4 points, 95% CI 7.7 to 13.1), emergency or urgent-care contact (7.9, 5.4 to 10.4) and regular-provider contact (3.3, 1.2 to 5.4). These are survey associations: they don't show why people turned to chatbots, or that chatbots replaced any care.</p>
       <figure>
-        <a href="figures/chatbots-trust-access.png"><img src="figures/chatbots-trust-access.png" width="1600" height="677" alt="Three panels of chatbot substitution by access measure. High-trust users sit near 60 to 70 percent and not-high-trust users near 30 percent, whatever their access to care."></a>
-        <figcaption>Exploratory figure from the working paper. In every panel the two trust lines sit far apart, while the access differences within a line are small.</figcaption>
+        <a href="figures/chatbots-trust-access.png"><img src="figures/chatbots-trust-access.png" width="1600" height="677" alt="Three panels of chatbot substitution by access measure. High-trust users sit near 61 to 72 percent and not-high-trust users near 30 percent, whatever their access to care."></a>
+        <figcaption>Exploratory figure from the working paper. The two trust lines sit far apart in every panel, and the access differences within each line are smaller.</figcaption>
       </figure>
-      <p class="source">Working paper · 2025 Canadian Digital Health Survey</p>
+      <p class="status"><span class="pill">Working paper</span> <span>Not peer reviewed · 2025 Canadian Digital Health Survey</span> <span class="slot" data-paper="chatbots" data-label="Read the preprint on SSRN">Paper: submitted to SSRN; link coming</span></p>
     </article>
 
     <article class="finding" id="two-recordings">
       <p class="topic">Testing AI scribes</p>
       <h3>Two recordings aren't enough to pick an AI scribe.</h3>
-      <p>I re-analysed three deployed scribes on 141 public or simulated consultations. A two-recording test picked the best one 52.3% of the time and the worst one 23.8% of the time. Picking at random finds the best one 33.3% of the time. It took 20 recordings to reach 90%. The findings are verified errors on benchmark notes, so they aren't patient harms.</p>
+      <p>I re-analysed three deployed scribes on 141 public or simulated consultations. A two-recording test picked the best one 52.3% of the time and the worst one 23.8% of the time. Picking at random finds the best one 33.3% of the time. It took 20 recordings to reach 90%, and 30 when only critical errors count. A panel of AI models, not clinicians, confirmed the errors on benchmark notes, so they aren't patient harms.</p>
       <figure>
         <a href="figures/two-recordings.png"><img src="figures/two-recordings.png" width="1428" height="714" alt="Line chart. The chance of picking the best scribe rises from 52.3 percent at 2 recordings to 90.5 percent at 20 recordings, against 33.3 percent by chance."></a>
-        <figcaption>Any verified finding, redrawn from Figure 2 of the working paper.</figcaption>
+        <figcaption>Any finding confirmed by the model panel, redrawn from Figure 2 of the working paper. The band shows how much the result moves when the 141 consultations are resampled; it isn't a forecast for a new clinic.</figcaption>
       </figure>
-      <p class="source">Working paper · Public and simulated benchmark data</p>
+      <p class="status"><span class="pill">Working paper</span> <span>Not peer reviewed · Public and simulated benchmark data</span> <span class="slot" data-paper="two-recordings">Paper: not posted yet</span></p>
     </article>
 
     <article class="finding" id="reviewers">
       <p class="topic">Testing the testers</p>
-      <h3>An accuracy test means little until you know how accurate the reviewers are.</h3>
-      <p>Take a 25-note pass or fail test of a tool with 30% bad notes. If the reviewer catches every error, the tool passes about 9% of the time. If the reviewer catches 60%, it passes about 52% of the time. A test that holds up when reviewer accuracy is only known to lie in a range takes 732 notes instead of 25. Measuring reviewers once with known-answer notes removes much of that cost.</p>
+      <h3>Not knowing how accurate the reviewers are can cost more than having inaccurate ones.</h3>
+      <p>Take the textbook test for error-free review: pass a tool if at most 4 of 25 notes are flagged. A tool with 30% bad notes passes about 9% of the time when review is error-free, with every error caught and no false alarms. If the reviewer catches 60% of errors and raises no false alarms, it passes about 52% of the time. To tell a tool with 10% bad notes from one with 30%, keeping each wrong decision to 10% or less, a test needs 25 notes with error-free review, and at most 75 when the reviewer's catch and false-alarm rates are known, anywhere within 60–100% and 0–5%. If you only know the rates lie somewhere in that range, it needs 732. Measuring a reviewer team once, with a bank of notes whose errors are already known, brings the expected cost to 139 notes per product, measuring notes included (though not the cost of making them), or 65 per product across 20 products, if the team catches 97% of errors with 0.5% false alarms. Each test still holds both risks to 10%; counting the small chance that the measurement itself is off, each overall risk is at most 15%. With a measuring set chosen for the worst case on the paper's accuracy grid, it's about 352 and 179. The model assumes independent notes and reviewers who are equally accurate on every tool, and the 60–100% range is an illustration: the few measured catch rates the paper cites are lower, about 25–37%, for physicians editing drafts and AI judges rather than dedicated reviewers.</p>
       <figure>
         <a href="figures/reviewers-pass-rate.png"><img src="figures/reviewers-pass-rate.png" width="1400" height="700" alt="Line chart. The chance that a tool with 30 percent bad notes passes falls from 52.3 percent at a 60 percent reviewer catch rate to 9.05 percent at 100 percent."></a>
-        <figcaption>Chance that a tool with 30% bad notes passes the 25-note test, by reviewer catch rate. Figure from the working paper.</figcaption>
+        <figcaption>Chance that a tool with 30% bad notes passes the 25-note test, by reviewer catch rate, with no false alarms or with 5%. Figure from the paper.</figcaption>
       </figure>
-      <p class="source">Working paper · Exact calculations on stated accuracy ranges</p>
+      <p class="status"><span class="pill">Working paper</span> <span>Not peer reviewed · Exact calculations on stated accuracy ranges</span> <span class="slot" data-paper="reviewers" data-label="Read “Who checks the checkers?” on SSRN">Paper: submitted to SSRN; link coming</span></p>
     </article>
 
     <article class="finding" id="consent">
       <p class="topic">Patients and consent</p>
-      <h3>About 1 in 8 Ontarians told about an AI scribe recall no explicit consent.</h3>
-      <p>In a Canadian online panel, 12.8% of Ontario respondents told that their provider used an AI scribe recalled only implied consent or never being asked (95% interval 10.1 to 15.4). Nationally it was 13.2%, and the share was highest at age 75 and over, at 27.8%, with a wide interval.</p>
+      <h3>About 1 in 8 Ontario respondents told about an AI scribe recall only implied consent to AI tools, or never being asked.</h3>
+      <p>In a Canadian online panel, 12.8% of Ontario respondents who had been told their provider used an AI scribe said that, when asked to consent to AI tools, they typically gave only implied consent or were never asked (exploratory subset; conditional 95% interval 10.1 to 15.4). The question covers AI tools in general, not one visit, and the answers are recalled, not verified. Nationally it was 13.2%, and the share was highest at age 75 and over, at 27.8%, with a wide interval.</p>
       <figure>
         <a href="figures/consent-by-age.png"><img src="figures/consent-by-age.png" width="1400" height="719" alt="Dot and interval chart by age group: 9.4 percent at 16 to 34, 14.1 at 35 to 54, 13.4 at 55 to 74 and 27.8 at 75 and over."></a>
         <figcaption>National estimates by age, with weighted percentages and conditional 95% intervals. The age comparison is exploratory.</figcaption>
       </figure>
-      <p class="source">Working paper · 2025 Canadian Digital Health Survey</p>
+      <p class="status"><span class="pill">Working paper</span> <span>Not peer reviewed · 2025 Canadian Digital Health Survey</span> <span class="slot" data-paper="consent">Paper: not posted yet</span></p>
     </article>
 
     <article class="finding" id="physician-pay">
       <p class="topic">Paying for AI</p>
       <h3>Saving a physician's time can lower their pay.</h3>
-      <p>In a worked scenario, five saved charting hours a month, used to finish earlier, cost CAD 650 in British Columbia, CAD 577.50 in Alberta and CAD 400 in Ontario. US Medicare pay doesn't change when service levels follow medical decision making. Using the time for added care raises pay in every setting, before costs. I haven't confirmed how these rules apply to any one physician's contract.</p>
+      <p>In a worked scenario, five saved charting hours a month, used to finish earlier, cost CAD 650 under British Columbia's Longitudinal Family Physician model, CAD 577.50 under Alberta's Primary Care Physician Compensation Model and CAD 400 under Ontario's Family Health Organization Plus (less if the physician already logs a lot of indirect-care time), at their printed base rates. US Medicare pay doesn't change when service levels follow medical decision making. In the paper's schedule, using the time for extra completed, payable services raises pay in every setting, before costs. I haven't confirmed how these rules apply to any one physician's contract.</p>
       <figure>
         <a href="figures/scribe-pay.png"><img src="figures/scribe-pay.png" width="1428" height="561" alt="Bar chart of monthly pay lost from five saved hours: CAD 650 in British Columbia, CAD 577.50 in Alberta, CAD 400 in Ontario and USD 0 under US Medicare."></a>
         <figcaption>Calculated from Table 1 of the working paper. The amounts change with which dates the hours fall on, and Ontario's also depends on its indirect-care allowance.</figcaption>
       </figure>
-      <p class="source">Working paper · Scenario on public payment rules, not observed behaviour</p>
+      <p class="status"><span class="pill">Working paper</span> <span>Not peer reviewed · Scenario on public payment rules, not observed behaviour</span> <span class="slot" data-paper="physician-pay">Paper: not posted yet</span></p>
     </article>
   </main>
 
-  <section class="about">
+  <section class="papers" id="papers">
+    <h2>Papers</h2>
+    <p class="note">Where each paper stands. I'll add each link once it's posted.</p>
+    <ul class="paper-list">
+      <li>
+        <cite>Who checks the checkers? The price of not knowing reviewer accuracy in AI testing</cite>
+        <span class="status"><span class="pill">Working paper</span> <span>Not peer reviewed</span> <span class="slot" data-paper="reviewers" data-label="Read it on SSRN">Submitted to SSRN; link coming</span></span>
+      </li>
+      <li>
+        <cite>Access or reliance? Using AI chatbot advice instead of contacting a health professional among Canadian health-chatbot users</cite>
+        <span class="status"><span class="pill">Working paper</span> <span>Not peer reviewed</span> <span class="slot" data-paper="chatbots" data-label="Read it on SSRN">Submitted to SSRN; link coming</span></span>
+      </li>
+      <li>
+        <cite>Who gets the time AI saves?</cite>
+        <span class="status"><span class="pill">In preparation</span> <span>When an AI scribe saves a family physician documentation time, where does the gain go under each payment design, and what does a public scribe program buy? Builds on the physician-pay finding above.</span></span>
+      </li>
+    </ul>
+  </section>
+
+  <section class="findings" id="public-data">
+    <div class="findings-head">
+      <h2>From public data</h2>
+      <p class="note">These are counts from public US government files, not papers. They haven't been peer reviewed.</p>
+    </div>
+
+    <article class="finding" id="hospital-ehr">
+      <p class="topic">Hospital records systems</p>
+      <h3>Epic is the main record system at 46% of matched US hospitals, and 37% of critical access hospitals.</h3>
+      <p>This is each hospital's main inpatient EHR, worked out by a written rule from ONC's public 2024 file. Of 4,054 hospitals that could be matched, Epic was the main system at 46.4%, Oracle Health at 20.8%, MEDITECH at 16.5% and TruBridge at 7.4%. At critical access hospitals, Epic's share was 36.7% and TruBridge's 15.5%. In Texas, 194 of 300 matched hospitals reported no Epic inpatient EHR. This shows what hospitals reported to Medicare's Promoting Interoperability program, not a full install base. The main-EHR call comes from that rule, not from a field in ONC's file. Of the 4,627 hospitals, 569 had no linked product and 4 reported only add-ons.</p>
+      <figure>
+        <a href="figures/hospital-ehr-2024.png"><img src="figures/hospital-ehr-2024.png" width="1428" height="550" alt="Bar chart of main EHR among 4,054 matched US hospitals in 2024: Epic 46.4 percent, Oracle Health 20.8, MEDITECH 16.5, TruBridge 7.4 and all others 8.8."></a>
+        <figcaption>Drawn from the counts in my table. "All others" covers 12 smaller groups, including hospitals that reported two main EHRs. Derived from ONC's public file; not an ONC product.</figcaption>
+      </figure>
+      <p class="status"><span class="pill">Public data</span> <span>A count under a written rule · Not peer reviewed · 2024 reporting year</span> <span class="slot" data-table="hospital-ehr">Table: not posted yet</span></p>
+    </article>
+
+    <article class="finding" id="ai-risk-summaries">
+      <p class="topic">AI transparency rules</p>
+      <h3>53 of 216 EHR developers linked a public AI risk summary. The US duty to publish these summaries is ending.</h3>
+      <p>On 26 Oct 2026, 53 of the 216 developers certified for decision support in ONC's CHPL database linked a public summary of how they manage AI risk. The other 163 stated that they don't currently supply a predictive decision-support tool as part of their certified software. ONC's HTI-5 final rule (91 FR 67916, published 28 Oct 2026) drops that duty from 28 Dec 2026. The 52 linked addresses (51 once a trailing slash is ignored) were recorded on 26 Oct, so a re-check from January can show which stay online. This is a count on one day. Each "not currently supplied" answer is the developer's own statement about its certified software, and other parties' tools can still run inside it.</p>
+      <figure>
+        <a href="figures/ai-risk-summaries.png"><img src="figures/ai-risk-summaries.png" width="1428" height="370" alt="Bar chart of 216 certified EHR developers on 26 October 2026: 53 linked a public AI risk summary and 163 said they don't currently supply a predictive decision-support tool as part of their certified software."></a>
+        <figcaption>Counted from ONC's public CHPL search. Six developers gave both a link and a "not currently supplied" statement, and they're counted as linked.</figcaption>
+      </figure>
+      <p class="status"><span class="pill">Public data</span> <span>A count on one day · Not peer reviewed · ONC CHPL, 26 Oct 2026</span> <span class="slot" data-table="ai-risk-summaries">Table: not posted yet</span></p>
+    </article>
+  </section>
+
+  <section class="data" id="data">
+    <h2>Data</h2>
+    <p class="note">Tables I've built, and the public sources behind the findings.</p>
+    <h3>Tables</h3>
+    <ul class="data-list">
+      <li>
+        <span><strong>US hospital EHR table.</strong> One row per hospital (4,627), with its main EHR in 2023 and 2024 and the rule used to choose it.</span>
+        <span class="status"><span class="slot" data-table="hospital-ehr">Table: not posted yet</span></span>
+      </li>
+      <li>
+        <span><strong>EHR developer AI risk summaries.</strong> All 216 developers, whether each linked a summary on 26 Oct 2026, and planned re-checks from January 2027.</span>
+        <span class="status"><span class="slot" data-table="ai-risk-summaries">Table: not posted yet</span></span>
+      </li>
+    </ul>
+    <h3>Sources</h3>
+    <ul class="data-list">
+      <li><span><a href="https://doi.org/10.5683/SP4/FXIQNS">2025 Canadian Digital Health Survey</a>, Canada Health Infoway, on Borealis. Used for the chatbot and consent findings. It's available from Borealis under its own licence, so I don't repost the rows.</span></li>
+      <li><span><a href="https://huggingface.co/datasets/ComposoAI/OmissionBench">OmissionBench</a>, a public benchmark (CC BY 4.0). Used for the two-recording finding.</span></li>
+      <li><span><a href="https://www.healthit.gov/data/datasets/certified-health-information-technology-reported-hospitals-promoting-interoperability">ONC hospital file</a>, for the EHR table, and <a href="https://chpl.healthit.gov/#/search">ONC's CHPL search</a>, for the developer count.</span></li>
+      <li><span>The reviewer and physician-pay findings are calculations, not data. Each paper will list its inputs.</span></li>
+    </ul>
+  </section>
+
+  <section class="press" id="press">
+    <h2>For journalists and organizers</h2>
+    <div class="press-grid">
+      <div class="press-item wide">
+        <h3>Short bio</h3>
+        <p class="bio">Zhou Yang, PhD, is an economist in Toronto who studies how AI in health care gets tested, paid for and used. He spent four years evaluating health programs at Certilytics and earned his PhD in economics at the University of Washington.</p>
+      </div>
+      <div class="press-item">
+        <h3>What I can speak to</h3>
+        <ul>
+          <li>How many recordings a fair AI scribe test needs</li>
+          <li>Why reviewer accuracy changes what a test result means</li>
+          <li>How saved charting time affects physician pay</li>
+          <li>What Canadians report about chatbots and consent</li>
+        </ul>
+      </div>
+      <div class="press-item">
+        <h3>Before you cite a number</h3>
+        <p>Everything here is a working paper or a public-data count, and none of it has been peer reviewed. Please say so. I'm glad to walk through the limits of any figure.</p>
+      </div>
+      <div class="press-item">
+        <h3>Photo</h3>
+        <p><a href="figures/zhou-yang.jpg">Portrait (JPG, 640 × 640)</a></p>
+      </div>
+      <div class="press-item">
+        <h3>Reach me</h3>
+        <p><a href="mailto:cadillacyz@gmail.com">cadillacyz@gmail.com</a> or <a href="https://www.linkedin.com/in/zhou-yang-252661a7">LinkedIn</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="about">
     <h2>About me</h2>
-    <p>I came to Toronto from Seattle. For four years at Certilytics I worked out whether health programs really changed the use and cost of care, across more than 40 evaluations. Before that I worked on pricing and demand at Amazon and Oracle. My PhD in economics is from the University of Washington. <a href="cv.html">My CV</a> has the details.</p>
+    <p>Most people call me Joe. I came to Toronto from Seattle. For four years at Certilytics I worked out whether health programs really changed the use and cost of care, across more than 40 evaluations, and built cost-effectiveness and budget-impact models. Before that I worked on pricing and demand at Amazon and Oracle. My PhD in economics is from the University of Washington. <a href="cv.html">My CV</a> has the details.</p>
     <p>Now I do independent research. I use AI tools for drafting, code and checking. I choose the questions, review the work and answer for the results.</p>
     <p>I'd like to meet clinicians, quality teams and researchers who are trying to work out whether a change helped. I'm also looking for a role in public-sector or health care economics and data science. LinkedIn is the easiest way to reach me.</p>
   </section>

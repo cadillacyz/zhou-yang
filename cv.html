@@ -68,10 +68,18 @@ h3 { font-size: 1rem; font-weight: 600; line-height: 1.4; }
   .skills { grid-template-columns: minmax(0, 1fr); gap: 0; }
   .skills dd { margin-bottom: 8px; }
 }
+@page { size: Letter; margin: 0.55in 0.6in; }
 @media print {
-  body { background: #fff; font-size: 10.5pt; line-height: 1.4; }
-  .wrap { max-width: none; padding: 0; gap: 14pt; }
-  .back { display: none; }
+  body { background: #fff; font-size: 9.75pt; line-height: 1.33; }
+  .wrap { max-width: none; padding: 0; gap: 9pt; }
+  section { gap: 6pt; padding-top: 7pt; }
+  h1 { font-size: 24pt; }
+  .entry { gap: 1pt; }
+  .entry ul { gap: 0; }
+  .skills { grid-template-columns: 112pt minmax(0, 1fr); gap: 2pt 10pt; }
+  h2 { break-after: avoid; }
+  .plain { break-inside: avoid; }
+  .back, .pdf-link { display: none; }
   a { color: inherit; text-decoration: none; }
   .entry { break-inside: avoid; }
 }
@@ -86,6 +94,9 @@ h3 { font-size: 1rem; font-weight: 600; line-height: 1.4; }
       <span>Economist, Toronto</span>
       <a href="https://www.linkedin.com/in/zhou-yang-252661a7">LinkedIn</a>
       <a href="mailto:cadillacyz@gmail.com">cadillacyz@gmail.com</a>
+      <a href="https://cadillacyz.github.io/zhou-yang/">cadillacyz.github.io/zhou-yang</a>
+      <a href="https://orcid.org/0009-0006-5744-6769">ORCID</a>
+      <a class="pdf-link" href="zhou-yang-cv.pdf">PDF</a>
     </p>
   </header>
 
@@ -107,7 +118,9 @@ h3 { font-size: 1rem; font-weight: 600; line-height: 1.4; }
         <li>Led 40+ causal evaluations across 15+ healthcare programs, using claims, eligibility, utilization and cost data.</li>
         <li>Presented findings and recommendations to client executives and state Medicaid agency staff.</li>
         <li>Built cost-benefit, ROI and budget-impact models that informed renewal and program decisions.</li>
+        <li>Built cost-effectiveness models (Markov state-transition models, QALYs) and survival models (Weibull, Cox) for long-term cost and outcome estimates.</li>
         <li>Helped build a GenAI analytics assistant and the evaluation harnesses that tested AI outputs before release.</li>
+        <li>Fine-tuned a biomedical language model (BioBERT) to turn unstructured clinical text into structured outcome variables.</li>
         <li>Deployed machine learning models in many projects, and built risk-prediction and forecasting models.</li>
         <li>Supervised three junior colleagues and led teams of three PhD researchers on public-health topics.</li>
       </ul>
@@ -132,6 +145,14 @@ h3 { font-size: 1rem; font-weight: 600; line-height: 1.4; }
     </div>
 
     <div class="entry">
+      <div class="entry-head"><h3>Research Assistant (Part-time), University of Washington</h3><span class="when">Jan 2018 to Mar 2022</span></div>
+      <p class="where">Seattle</p>
+      <ul>
+        <li>Estimated how Amazon Fresh's entry affected grocery stores (staggered difference-in-differences across 8,380 stores in 17 markets) and how fulfillment centres affected local retail jobs (instrumental variables).</li>
+      </ul>
+    </div>
+
+    <div class="entry">
       <div class="entry-head"><h3>Graduate Instructor, Economics, University of Washington</h3><span class="when">2019 to 2022</span></div>
       <p class="where">Seattle</p>
       <ul>
@@ -152,6 +173,15 @@ h3 { font-size: 1rem; font-weight: 600; line-height: 1.4; }
   </section>
 
   <section>
+    <h2>Working papers</h2>
+    <div class="plain">
+      <p>Who checks the checkers? The price of not knowing reviewer accuracy in AI testing. <span class="pill">Working paper</span>, not peer reviewed. <span class="slot" data-paper="reviewers" data-label="Read it on SSRN.">Submitted to SSRN, November 2026; link coming.</span></p>
+      <p>Access or reliance? Using AI chatbot advice instead of contacting a health professional among Canadian health-chatbot users. <span class="pill">Working paper</span>, not peer reviewed. <span class="slot" data-paper="chatbots" data-label="Read it on SSRN.">Submitted to SSRN, November 2026; link coming.</span></p>
+      <p>Who gets the time AI saves? In preparation.</p>
+    </div>
+  </section>
+
+  <section>
     <h2>Publications and patents</h2>
     <div class="plain">
       <p>Ren L, Yang Z, Wang Y, et al. <a href="https://pubmed.ncbi.nlm.nih.gov/32928164/">The relations among worry, meta-worry, intolerance of uncertainty and attentional bias for threat in men at high risk for generalized anxiety disorder: a network analysis.</a> <em>BMC Psychiatry</em>. 2020;20(1):452.</p>
@@ -163,13 +193,19 @@ h3 { font-size: 1rem; font-weight: 600; line-height: 1.4; }
     <h2>Skills</h2>
     <dl class="skills">
       <dt>Causal inference</dt>
-      <dd>Staggered difference-in-differences, synthetic control, regression discontinuity, doubly robust estimation, double machine learning, causal forests</dd>
+      <dd>Difference-in-differences (including staggered), synthetic control, regression discontinuity, instrumental variables, propensity score matching, doubly robust estimation, double machine learning, causal forests</dd>
+      <dt>Health economics</dt>
+      <dd>Cost-effectiveness analysis (Markov state-transition models, QALYs, ICERs), budget impact models, survival analysis (Cox, Weibull)</dd>
       <dt>Experiments</dt>
       <dd>Online A/B tests on price design</dd>
       <dt>Machine learning</dt>
-      <dd>Risk prediction, forecasting, deep learning in PyTorch</dd>
+      <dd>Risk prediction, forecasting, gradient-boosted trees, deep learning in PyTorch</dd>
+      <dt>Language models</dt>
+      <dd>Retrieval-augmented generation, fine-tuning (LoRA, QLoRA), biomedical named entity recognition (BioBERT), evaluation harnesses, Hugging Face, LangChain</dd>
+      <dt>Health data</dt>
+      <dd>Claims, eligibility and utilization data; OMOP CDM; HL7 FHIR; risk adjustment</dd>
       <dt>Tools</dt>
-      <dd>Python, R, SQL, SQL Server, Snowflake, PySpark, Power BI, Excel and VBA</dd>
+      <dd>Python, R, SQL, SQL Server, Snowflake, PySpark, AWS (SageMaker, Redshift), Docker, Git, Power BI, Excel and VBA</dd>
     </dl>
   </section>
 </div>
